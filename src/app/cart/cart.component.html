@@ -1,0 +1,148 @@
+<div class="colorlib-shop">
+    <div class="container">
+      <div class="row row-pb-md">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="process-wrap">
+            <div class="process text-center active">
+              <p><span>01</span></p>
+              <h3>Shopping Cart</h3>
+            </div>
+            <div class="process text-center">
+              <p><span>02</span></p>
+              <h3>Checkout</h3>
+            </div>
+            <div class="process text-center">
+              <p><span>03</span></p>
+              <h3>Order Complete</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-pb-md">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="product-name">
+            <div class="one-forth text-center">
+              <span>Product Details</span>
+            </div>
+            <div class="one-eight text-center">
+              <span>Price</span>
+            </div>
+            <div class="one-eight text-center">
+              <span>Quantity</span>
+            </div>
+            <div class="one-eight text-center">
+              <span>Total</span>
+            </div>
+            <div class="one-eight text-center">
+              <span>Remove</span>
+            </div>
+          </div>
+          <div class="product-cart" *ngFor="let item of items">
+            <div class="one-forth">
+                <div class="product-img" >
+                    <img src="assets/product/{{item.product.imageLocal}}" width="100">
+								</div>
+                
+              <div class="display-tc">
+                <h3>{{item.product.name}}</h3>
+                <h3>{{item.product.weight}}</h3>
+              </div>
+            </div>
+            <div class="one-eight text-center">
+              <div class="display-tc">
+                <span class="price">{{item.product.price}}</span>
+              </div>
+            </div>
+            <div class="one-eight text-center">
+              <div class="display-tc">
+                <input type="text"  name="quantity" value="{{item.quantity}}" class="form-control input-number text-center"  id="{{item.product.id}}"    (change)="onChange($event)"  >
+              </div>
+            </div>
+            
+            <div class="one-eight text-center">
+              <div class="display-tc">
+                <span class="price">{{item.product.price * item.quantity}}</span>
+              </div>
+            </div>
+            <div class="one-eight text-center">
+              <div class="display-tc">
+                  <a (click)="remove(item.product.id)" class="closed" >X</a> 
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="total-wrap">
+            <div class="row">
+              <div class="col-md-8">
+                
+              </div>
+              <div class="col-md-3 col-md-push-1 text-center">
+                <div class="total">
+                  <div class="sub">
+                    <p><span>Subtotal:</span> <span>{{total}}</span></p>
+                    <p><span>Delivery:</span> <span>0.00</span></p>
+                   
+                  </div>
+                  <div class="grand-total">
+                    <p><span><strong>Total:</strong></span> <span>{{total}}</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-10 col-md-offset-1">    
+                <div class="col-md-8">                  
+                </div>
+                <div class="col-md-3 col-md-push-1 text-center">
+                    <div class="col-md-12">
+                        <p><a href="/checkout" class="btn btn-primary " [ngClass]="{'disabled': total == 0}" >Checkout</a></p>
+                      </div>
+                </div>           
+          </div>
+        </div>
+
+     
+
+    </div>
+  </div>
+  
+  <!--
+<table border="1">
+    <tr>
+        <th>Option</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Photo</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+    <tr *ngFor="let item of items">
+        <td align="center">
+            <a (click)="remove(item.product.id)">X</a>
+        </td>
+        <td>{{item.product.id}}</td>
+        <td>{{item.product.name}}</td>
+        <td>
+            <img src="assets/product/{{item.product.imageLocal}}" width="50">
+        </td>
+        <td>{{item.product.price}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.product.price * item.quantity}}</td>
+    </tr>
+    <tr>
+        <td colspan="6" align="right">Total</td>
+        <td>{{total}}</td>
+    </tr>
+</table>
+
+<button (click)="goBack()">go back</button>
+-->

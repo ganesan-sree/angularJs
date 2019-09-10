@@ -1,0 +1,106 @@
+<div class="colorlib-loader"></div>
+
+	<div id="page">
+	
+	
+    
+
+
+
+
+    <div class="colorlib-shop">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 col-md-push-2">
+              <div class="row row-pb-lg">
+
+                <div class="col-md-4 text-center"  *ngFor="let prd of products1" >
+                  <div class="product-entry">
+                    <div class="product-img" >
+                      <img src="assets/product/{{prd.imageLocal}}" alt="{{prd.name}}"  height="150" width="150" />
+                    </div>
+                    <div class="desc">
+                      <h3><a href="product-detail.html">{{prd.name}}</a></h3>
+                      <p class="price">Price:<span>{{prd.price}}</span></p>
+                      <p class="price">Weight:<span>{{prd.weight}}</span></p>
+                      <span class="addtocart"><button class="btn-primary" (click)="addItem(prd.id)">Add to Cart</button></span> 
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+           
+            </div>
+            <div class="col-md-2 col-md-pull-10">
+              <div class="sidebar">
+                <div class="side">
+                  <h2>Categories</h2>
+                  <div class="fancy-collapse-panel">
+                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                             <div class="panel panel-default">
+                                 <div class="panel-heading" role="tab" id="headingOne">
+                                     <h4 class="panel-title">
+                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Fruits & Vegetables
+                                         </a>
+                                     </h4>
+                                 </div>
+                                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                     <div class="panel-body">
+                                         <ul>
+                                           <li><a href="/products/30">Fruits</a></li>
+                                           <li><a href="/products/17">Vegetables</a></li>
+                                           <li><a href="/products/25">Leafy</a></li>
+                                           
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
+                                                        
+                          </div>
+                       </div>
+                </div>
+                
+              
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quatity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prd of products1">
+            <td>{{prd.id}}</td>
+            <td> <img src="assets/product/{{prd.imageLocal}}" alt="{{prd.name}}"  height="90" width="90" /></td>
+            <td>{{prd.name}}</td>
+            <td>{{prd.price}}</td>
+            <td>
+              {{prd.weight}}         
+            </td>
+            <td>
+                <button class="btn-primary" (click)="addItem(prd.id)">Add to Cart</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table> 
+
+            
+            -->
+            
+                        
+     
+
