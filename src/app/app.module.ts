@@ -16,6 +16,12 @@ import { Globals } from './Global';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component'
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './effects/product.effects';
 
 
 @NgModule({
@@ -38,6 +44,15 @@ import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers, 
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([ProductEffects]),
     
   ],
   providers: [Globals,FormBuilder],

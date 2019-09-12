@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class CheckoutComponent implements OnInit, AfterViewInit {
 
-  @ViewChild("firstName") firstName: ElementRef;
+  @ViewChild("firstName", { static: true }) firstName: ElementRef;
   
   ngAfterViewInit(): void {
     console.log('This event fire after the content init have been loaded!');

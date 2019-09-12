@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product } from './entity/product.entity'
 import { Category } from './entity/Category.entity';
@@ -19,7 +18,6 @@ export class ProductServiceService {
   private category1: Category;
   constructor(
     private http: HttpClient,
-     private route: ActivatedRoute,
      private location: Location
      ){
   }
@@ -37,8 +35,6 @@ export class ProductServiceService {
       return of(result as T);
     };
   }
-
-
 
 
 

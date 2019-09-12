@@ -8,8 +8,9 @@ import { CartItem } from '../entity/cartitem.entity';
 import { Observable, of } from 'rxjs';
 import {ProductServiceService} from '../product-service.service';
 import { Globals } from '../Global'
-
-
+import { Store, select ,State} from '@ngrx/store';
+import { AppState,selectProducts } from '../reducers';
+import { LoadProducts } from '../actions/product.actions';
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
@@ -17,9 +18,9 @@ import { Globals } from '../Global'
 })
 export class ProductlistComponent implements OnInit {
 
-  private products  = []; 
-  public products1: Product[];
+  public products: Product[];
   private id :string  = null; 
+  data$: Observable<Product[]>;
 
   constructor(
     private productService :ProductServiceService,
@@ -27,7 +28,7 @@ export class ProductlistComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private globals:Globals,
-    
+    private store: Store<AppState>
      ){
   }
 
@@ -50,15 +51,23 @@ export class ProductlistComponent implements OnInit {
       this.id='17';
     }
 
-    this.productService.getProducts(this.id).subscribe((data:any[])=> {
-      for (let key in data) {     
-        console.log ('key: ' +  key + ',  value: ' + data[key]);
-        this.products=data[key].product;
-        this.products1=(Category.fromJSON(data[key])).products;
-    }
+   console.log("Going to call Actions");
+   this.store.dispatch(new LoadProducts({productId:  this.id}));
+   this.data$= this.store.pipe(select(selectProducts));
+
+   this.data$.subscribe(val => 
+    this.products=val
+    );
    
-    this.loadCart();
-    }); 
+   // this.productService.getProducts(this.id).subscribe((data:any[])=> {
+   //   for (let key in data) {     
+   //     console.log ('key: ' +  key + ',  value: ' + data[key]);
+  //      this.products=data[key].product;
+   //     this.products1=(Category.fromJSON(data[key])).products;
+  //  }
+   
+  //this.loadCart();
+ //   }); 
   }
 
   goBack(): void {
@@ -73,7 +82,7 @@ export class ProductlistComponent implements OnInit {
 
   addItem(pid){
     console.log(pid);
-    console.log(this.products1);  
+    //console.log(this.products);  
     var id = pid;
     console.log(this.find(id));
 			if (id) {
@@ -108,18 +117,18 @@ export class ProductlistComponent implements OnInit {
 				
 			} 
    
-    console.log(this.products);
+    
     this.loadCart();
   }
 
 
   find(id: string): Product {
-    return this.products1[this.getSelectedIndex(id)];
+    return this.products[this.getSelectedIndex(id)];
 }
 
 private getSelectedIndex(id: string) {
-    for (var i = 0; i < this.products1.length; i++) {
-        if (this.products1[i].id == id) {
+    for (var i = 0; i < this.products.length; i++) {
+        if (this.products[i].id == id) {
             return i;
         }
     }
